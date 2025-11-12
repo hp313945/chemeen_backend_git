@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PACKINGCODE LIST</title>
+    <style>
+        body {
+            margin: 30px;
+            font-family: Arial, sans-serif;
+        }
+
+        .page-break-container{
+            page-break-inside: avoid;
+            page-break-after: always;
+        }
+
+        .header {
+            color: #000;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h2 {
+            margin-top: 30px;
+            margin-bottom: 0px;
+            font-size: 13px;
+        }
+
+        .header h1 {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            font-size: 13px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+            font-size: 12px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .info-table th {
+            width: 20%;
+            text-align: left;
+        }
+
+        .info-table td {
+            width: 80%;
+        }
+
+        .code-table {
+            margin-bottom: 20px;
+        }
+
+        .code-table th {
+            text-align: center;
+        }
+
+        .code-table td {
+            text-align: center;
+        }
+
+        .total-row {
+            font-weight: bold;
+            background-color: #f9f9f9;
+        }
+
+        .total-cell {
+            font-weight: bold;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+
+    {{#each products}}
+    <div class="page-break-container">
+        <div class="header">
+            <h2>PACKINGCODE LIST</h2>
+            <h1>PROCESSORCODE: {{processorCode}}</h1>
+        </div>
+        <table class="info-table">
+            <tbody>
+                <tr>
+                    <th>EXPORTER NAME</th>
+                    <td>{{exporterName}}</td>
+                </tr>
+                <tr>
+                    <th>VARIETY</th>
+                    <td>{{variety}}</td>
+                </tr>
+                <tr>
+                    <th>TYPE OF PACKS</th>
+                    <td>{{typeOfPacks}}</td>
+                </tr>
+                <tr>
+                    <th>PI. NO/PO</th>
+                    <td>{{piNo}}</td>
+                </tr>
+                <tr>
+                    <th>BUYER</th>
+                    <td>{{buyer}}</td>
+                </tr>
+                <tr>
+                    <th>SAMPLE SCALE</th>
+                    <td>{{sampleScale}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="code-table">
+            <thead>
+                <tr>
+                    <th>CODE</th>
+                    <th>FARMER</th>
+                    {{#each ageCategories}}
+                    <th>{{this}}</th>
+                    {{/each}}
+                    <th>TOTAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each codes}}
+                <tr>
+                    <td>{{code}}</td>
+                    <td>{{farmId}}</td>
+                    {{#each ageCategoryValues}}
+                    <th>{{this}}</th>
+                    {{/each}}
+                    <td>{{total}}</td>
+                </tr>
+                {{/each}}
+                <tr class="total-row">
+                    <td></td>
+                    <td class="total-cell">TOTAL</td>
+                    {{#each productTotals}}
+                    <th>{{this}}</th>
+                    {{/each}}
+                    <td>{{grandTotal}}</td>
+                </tr>
+            </tbody>
+        </table>
+        {{#if ../createdAt}}
+        <div style="margin-top: 20px; text-align: right; font-size: 12px;">
+            <strong>Created At:</strong> {{../createdAt}}
+        </div>
+        {{/if}}
+    </div>
+
+    <div class="page-break-container">
+        <div class="header">
+            <h2>SCALE REPORT</h2>
+            <h1>PROCESSORCODE: {{processorCode}}</h1>
+        </div>
+        <table class="info-table">
+            <tbody>
+                <tr>
+                    <th>EXPORTER NAME</th>
+                    <td>{{exporterName}}</td>
+                </tr>
+                <tr>
+                    <th>VARIETY</th>
+                    <td>{{variety}}</td>
+                </tr>
+                <tr>
+                    <th>TYPE OF PACKS</th>
+                    <td>{{typeOfPacks}}</td>
+                </tr>
+                <tr>
+                    <th>PI. NO/PO</th>
+                    <td>{{piNo}}</td>
+                </tr>
+                <tr>
+                    <th>BUYER</th>
+                    <td>{{buyer}}</td>
+                </tr>
+                <tr>
+                    <th>SAMPLE SCALE</th>
+                    <td>{{sampleScale}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="code-table">
+            <thead>
+                <tr>
+                    <th>CODE</th>
+                    <th>TRACEABILITY</th>
+                    {{#each ageCategories}}
+                    <th>{{this}}</th>
+                    {{/each}}
+                    <th>TOTAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each codes}}
+                <tr>
+                    <td>{{code}}</td>
+                    <td>{{farmId}}</td>
+                    {{#each ageCategoryScale}}
+                    <th>{{this}}</th>
+                    {{/each}}
+                    <td>{{totalScale}}</td>
+                </tr>
+                {{/each}}
+                <tr class="total-row">
+                    <td></td>
+                    <td class="total-cell">TOTAL</td>
+                    {{#each scaleTotals}}
+                    <th>{{this}}</th>
+                    {{/each}}
+                    <td>{{grandTotalScale}}</td>
+                </tr>
+            </tbody>
+        </table>
+        {{#if ../createdAt}}
+        <div style="margin-top: 20px; text-align: right; font-size: 12px;">
+            <strong>Created At:</strong> {{../createdAt}}
+        </div>
+        {{/if}}
+    </div>
+    {{/each}}
+</body>
+
+</html>
